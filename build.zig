@@ -86,7 +86,7 @@ pub fn build(b: *std.Build) void {
     });
     //lib.defineCMacro("SOUNDIO_STATIC_LIBRARY", null);
     b.installArtifact(lib);
-    lib.installHeadersDirectory("soundio", "soundio");
+    lib.installHeadersDirectory(.{ .path = "soundio" }, "soundio", .{});
 
     const sio_list_devices = b.addExecutable(.{
         .name = "sio_list_devices",
