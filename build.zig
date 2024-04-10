@@ -88,6 +88,13 @@ pub fn build(b: *std.Build) void {
     b.installArtifact(lib);
     lib.installHeadersDirectory(.{ .path = "soundio" }, "soundio", .{});
 
+    const bindings = b.addModule("soundio", .{
+        .root_source_file = .{ .path = "bindings.zig" },
+        .target = target,
+        .optimize = optimize,
+    });
+    bindings.linkLibrary(lib);
+
     const sio_list_devices = b.addExecutable(.{
         .name = "sio_list_devices",
         .target = target,
