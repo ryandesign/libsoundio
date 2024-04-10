@@ -32,7 +32,7 @@ pub fn build(b: *std.Build) void {
 
             lib.linkLibrary(pulseaudio_dep.artifact("pulse"));
             lib.addCSourceFile(.{
-                .file = .{ .path = "src/pulseaudio.c" },
+                .file = b.path("src/pulseaudio.c"),
                 .flags = flags,
             });
         },
@@ -41,13 +41,13 @@ pub fn build(b: *std.Build) void {
             lib.linkFramework("CoreAudio");
             lib.linkFramework("AudioUnit");
             lib.addCSourceFile(.{
-                .file = .{ .path = "src/coreaudio.c" },
+                .file = b.path("src/coreaudio.c"),
                 .flags = flags,
             });
         },
         .windows => {
             lib.addCSourceFile(.{
-                .file = .{ .path = "src/wasapi.c" },
+                .file = b.path("src/wasapi.c"),
                 .flags = flags,
             });
 
@@ -58,9 +58,9 @@ pub fn build(b: *std.Build) void {
     }
 
     lib.linkLibC();
-    lib.addIncludePath(.{ .path = "." });
+    lib.addIncludePath(b.path("."));
     lib.addConfigHeader(b.addConfigHeader(.{
-        .style = .{ .cmake = .{ .path = "src/config.h.in" } },
+        .style = .{ .cmake = b.path("src/config.h.in") },
     }, .{
         .SOUNDIO_HAVE_JACK = null,
         .SOUNDIO_HAVE_PULSEAUDIO = if (t.os.tag == .linux) {} else null,
@@ -86,10 +86,10 @@ pub fn build(b: *std.Build) void {
     });
     //lib.defineCMacro("SOUNDIO_STATIC_LIBRARY", null);
     b.installArtifact(lib);
-    lib.installHeadersDirectory(.{ .path = "soundio" }, "soundio", .{});
+    lib.installHeadersDirectory(b.path("soundio"), "soundio", .{});
 
     const bindings = b.addModule("soundio", .{
-        .root_source_file = .{ .path = "bindings.zig" },
+        .root_source_file = b.path("bindings.zig"),
         .target = target,
         .optimize = optimize,
     });

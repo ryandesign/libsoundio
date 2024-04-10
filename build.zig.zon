@@ -1,11 +1,11 @@
 .{
     .name = "libsoundio",
-    .version = "2.0.1-5",
+    .version = "2.0.1-6",
 
     .dependencies = .{
         .pulseaudio = .{
-            .url = "https://github.com/andrewrk/pulseaudio/archive/refs/tags/16.1.1-1.tar.gz",
-            .hash = "12201593ae7a87c7d3de13586011b26a5fd529cbedf52c67d54b8857267422d70dd2",
+            .url = "https://github.com/andrewrk/pulseaudio/archive/refs/tags/16.1.1-2.tar.gz",
+            .hash = "1220c4a15f871f0784113c34e92e57b2862e7f678a467e5d246a6f2ebfadfca8d116",
         },
     },
     .paths = .{
