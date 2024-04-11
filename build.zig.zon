@@ -11,6 +11,7 @@
     .paths = .{
         "LICENSE",
         "README.md",
+        "bindings.zig",
         "build.zig",
         "build.zig.zon",
         "doc",
