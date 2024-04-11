@@ -88,7 +88,7 @@ pub fn build(b: *std.Build) void {
     b.installArtifact(lib);
     lib.installHeadersDirectory(b.path("soundio"), "soundio", .{});
 
-    const bindings = b.addModule("soundio", .{
+    const bindings = b.addModule("SoundIo", .{
         .root_source_file = b.path("bindings.zig"),
         .target = target,
         .optimize = optimize,
